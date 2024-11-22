@@ -1,22 +1,139 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white">
 
+    <!-- Course/Group code -->
     <TextView
-        android:id="@+id/text_splash1"
-        android:layout_width="match_parent"
+        android:id="@+id/tvCourseCode"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="This is the splash activity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="CS 3102"
+        android:textColor="@color/grey"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Group name -->
+    <TextView
+        android:id="@+id/tvGroupName"
+        android:fontFamily="@font/inter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="GROUP NAME"
+        android:textColor="#757575"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCourseCode" />
+
+    <!-- Welcome text -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:fontFamily="@font/inter_extra_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textStyle="bold"
+        style="@style/WelcomeText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp" />
+
+    <!-- "to [app name]" text -->
+    <TextView
+        android:id="@+id/tvAppName"
+        android:fontFamily="@font/inter_extra_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to [app\nname]"
+        android:textStyle="bold"
+        style="@style/WelcomeText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:textSize="11dp"
+        android:fontFamily="@font/inter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="YOUR HOME ASSISTANT FOR FIRE SAFETY"
+        style="@style/SubtitleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
+
+    <!-- Shield Image (above circle) -->
+    <!-- Elevation to make sure it's on top of the circle -->
+
+    <!-- Circle background (below shield) -->
+
+    <ImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="60dp"
+        android:elevation="4dp"
+        android:src="@drawable/shield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+
+    <View
+        android:id="@+id/circleBackground"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:background="@drawable/circle_shape"
+        android:layout_marginBottom="-250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
+
+    <!-- Get Started Link Layout -->
+    <LinearLayout
+        android:id="@+id/llGetStarted"
+        android:fontFamily="@font/inter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp">
+
+        <!-- Get Started Link -->
+        <TextView
+            android:id="@+id/tvGetStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Let's Get Started"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:textStyle="bold"
+            android:background="?attr/selectableItemBackground" />
+
+        <!-- Arrow Icon -->
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_keyboard_double_arrow_right_24" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
