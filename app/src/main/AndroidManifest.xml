@@ -1,17 +1,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <!-- Requesting Internet Permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmokeApplicationAppPRO"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:label="@string/app_name">
 
+
+        <!-- SplashActivity -->
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -23,22 +30,32 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <!-- LoginActivity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:label="Login"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
+
+        <!-- RegisterActivity for user registration -->
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
-            android:label="Register"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+            android:label="@string/app_name"/>
+
+
+        <!-- MainActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
+
+
     </application>
+
+
 </manifest>
+

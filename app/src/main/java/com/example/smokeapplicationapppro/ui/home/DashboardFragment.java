@@ -9,24 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.smokeapplicationapppro.R;
-import com.example.smokeapplicationapppro.databinding.FragmentHomeBinding;
+import com.example.smokeapplicationapppro.databinding.FragmentDashboardBinding;
 
-public class HomeFragment extends Fragment {
-    private FragmentHomeBinding binding;
+public class DashboardFragment extends Fragment {
+    private FragmentDashboardBinding binding;
     private GestureDetector gestureDetector;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), binding.textHome::setText);
+        DashboardViewModel dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        dashboardViewModel.getText().observe(getViewLifecycleOwner(), binding.textDashboard::setText);
 
         // Initialize GestureDetector
         gestureDetector = new GestureDetector(requireContext(), new GestureDetector.SimpleOnGestureListener() {
@@ -43,13 +45,13 @@ public class HomeFragment extends Fragment {
                 try {
                     float diffX = e1.getX() - e2.getX();
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                        if (diffX > 0) { // Left swipe
-                            navigateToDashboard();
+                        if (diffX < 0) { // Right swipe
+                            navigateToHome();
                             return true;
                         }
                     }
                 } catch (Exception e) {
-                    Log.e("HomeFragment", "Error processing gesture", e);
+                    Log.e("DashboardFragment", "Error processing gesture", e);
                 }
                 return false;
             }
@@ -64,12 +66,12 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private void navigateToDashboard() {
+    private void navigateToHome() {
         try {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-            navController.navigate(R.id.action_navigation_home_to_navigation_dashboard);
+            navController.navigate(R.id.action_navigation_dashboard_to_navigation_home);
         } catch (Exception e) {
-            Log.e("HomeFragment", "Navigation error", e);
+            Log.e("DashboardFragment", "Navigation error", e);
         }
     }
 

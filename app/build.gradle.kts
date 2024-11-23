@@ -26,17 +26,19 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -58,4 +60,10 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth:21.1.0")
     implementation ("com.google.firebase:firebase-database:20.0.3")
     implementation ("com.google.firebase:firebase-core:20.1.0")
+
+    //gestures
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.6.0")
+
+
 }
