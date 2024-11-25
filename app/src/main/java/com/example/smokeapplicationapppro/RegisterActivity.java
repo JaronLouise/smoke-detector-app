@@ -1,6 +1,7 @@
 package com.example.smokeapplicationapppro;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity"; // For logging
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Initialize views using IDs from our layout
         nameInput = findViewById(R.id.nameInput);
         emailInput = findViewById(R.id.emailInput);
-        usernameInput = findViewById(R.id.usernameInput);
+        usernameInput = findViewById(R.id.nameUnderline);
         passwordInput = findViewById(R.id.passwordInput);
         registerButton = findViewById(R.id.registerButton);
         loginLink = findViewById(R.id.loginLink);

@@ -1,5 +1,6 @@
 package com.example.smokeapplicationapppro.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -7,26 +8,48 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.smokeapplicationapppro.R;
-import com.example.smokeapplicationapppro.databinding.FragmentHomeBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeFragment extends Fragment {
-    private FragmentHomeBinding binding;
+
+    private TextView tvSafetyStatus, tvSafetyMessage, tvSafetyLevel;
+    private ImageView ivHouseGif;
+    private ConstraintLayout rootLayout;
+
+    private DatabaseReference sensorRef;
     private GestureDetector gestureDetector;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Inflate the layout
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), binding.textHome::setText);
+        // Initialize views
+        tvSafetyStatus = view.findViewById(R.id.tv_safety_status);
+        tvSafetyMessage = view.findViewById(R.id.tv_message);
+        tvSafetyLevel = view.findViewById(R.id.tv_safety_number);
+        ivHouseGif = view.findViewById(R.id.iv_house_gif);
+        rootLayout = view.findViewById(R.id.root_layout);
+
+        // Set up Firebase listener
+        setupFirebaseListener();
 
         // Initialize GestureDetector
         gestureDetector = new GestureDetector(requireContext(), new GestureDetector.SimpleOnGestureListener() {
@@ -55,13 +78,66 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Set touch listener
-        root.setOnTouchListener((v, event) -> {
+        // Set touch listener for swipe gestures
+        rootLayout.setOnTouchListener((v, event) -> {
             v.performClick();
             return gestureDetector.onTouchEvent(event);
         });
 
-        return root;
+        return view;
+    }
+
+    private void setupFirebaseListener() {
+        // Initialize Firebase reference
+        sensorRef = FirebaseDatabase.getInstance()
+                .getReferenceFromUrl("https://smokedetectiondatabase-default-rtdb.firebaseio.com/sensor");
+
+        sensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Extract data from Firebase
+                    String buzzerStatus = snapshot.child("buzzerStatus").getValue(String.class);
+                    String ledStatus = snapshot.child("ledStatus").getValue(String.class);
+                    Integer mq2Value = snapshot.child("mq2Value").getValue(Integer.class);
+
+                    // Update the UI
+                    updateUI(mq2Value, buzzerStatus, ledStatus);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                tvSafetyMessage.setText("Error fetching data from database.");
+                tvSafetyStatus.setTextColor(Color.RED);
+            }
+        });
+    }
+
+    private void updateUI(Integer mq2Value, String buzzerStatus, String ledStatus) {
+        // Update safety level
+        tvSafetyLevel.setText(String.valueOf(mq2Value));
+
+        // Determine safety status and update UI based on ledStatus
+        if ("green".equals(ledStatus)) {
+            tvSafetyStatus.setText("Safe");
+            tvSafetyStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
+            ivHouseGif.setImageResource(R.drawable.error_icon); // Replace with your safe gif
+            tvSafetyMessage.setText("Everything is okay. No smoke detected.");
+        } else if ("yellow".equals(ledStatus)) {
+            tvSafetyStatus.setText("Warning");
+            tvSafetyStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow));
+            ivHouseGif.setImageResource(R.drawable.error_icon); // Replace with your warning gif
+            tvSafetyMessage.setText("Smoke detected! Stay alert.");
+        } else if ("red".equals(ledStatus)) {
+            tvSafetyStatus.setText("Danger");
+            tvSafetyStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.red));
+            ivHouseGif.setImageResource(R.drawable.error_icon); // Replace with your danger gif
+            tvSafetyMessage.setText("Danger! Immediate action required!");
+        }
+
+        // Optionally log or display buzzer status
+        Log.d("HomeFragment", "Buzzer Status: " + buzzerStatus);
     }
 
     private void navigateToDashboard() {
@@ -76,6 +152,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        sensorRef = null; // Clean up Firebase listener reference
     }
 }

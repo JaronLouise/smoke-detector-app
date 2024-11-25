@@ -1,6 +1,6 @@
 package com.example.smokeapplicationapppro;
 
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // Initialize UI components
-        etEmail = findViewById(R.id.etName); // Email input field
-        etPassword = findViewById(R.id.etEmail); // Password input field
+        etEmail = findViewById(R.id.etEmail); // Email input field
+        etPassword = findViewById(R.id.etPassword); // Password input field
         btnLogin = findViewById(R.id.btnLogin); // Login button
         tvRegister = findViewById(R.id.tvRegister); // Reference to the Register TextView
         tvForgotPassword = findViewById(R.id.tvForgotPassword); // Reference to the Forgot Password TextView

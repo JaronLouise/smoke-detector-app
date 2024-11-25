@@ -5,4 +5,8 @@
     <string name="title_profiles">Profile</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="safety_label">Safety Levels</string>
+
+    <string name="safety_message_safe">Good job! Keep up the good work!</string>
+    <string name="safety_message_warning">Smoke Detected, stay Vigilant.</string>
+    <string name="safety_message_danger">Danger! Help is on the way.</string>
 </resources>
