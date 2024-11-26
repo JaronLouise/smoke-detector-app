@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/inter"
-                    android:text="30"
+                    android:text="--"
                     android:textColor="@color/white"
                     android:textSize="36sp"
                     android:textStyle="bold" />
@@ -178,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
-                    android:text="OFFLINE"
+                    android:text="--"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -218,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
-                    android:text="SAFE"
+                    android:text="--"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
