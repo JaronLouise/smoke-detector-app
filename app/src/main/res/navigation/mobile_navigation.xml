@@ -40,4 +40,5 @@
         android:name="com.example.smokeapplicationapppro.ui.profiles.ProfilesFragment"
         android:label="@string/title_profiles"
         tools:layout="@layout/fragment_profiles" />
+
 </navigation>

@@ -1,6 +1,7 @@
 package com.example.smokeapplicationapppro.ui.home;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.example.smokeapplicationapppro.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class HomeFragment extends Fragment {
 
-    private TextView tvSafetyStatus, tvSafetyMessage, tvSafetyLevel;
+    private TextView tvSafetyStatus, tvSafetyMessage, tvSafetyLevel, tvIs, tvSafetyNumber;
     private ImageView ivHouseGif;
     private ConstraintLayout rootLayout;
 
@@ -38,14 +40,24 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Make the status bar transparent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            requireActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
+            requireActivity().getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            );
+        }
 
         // Initialize views
         tvSafetyStatus = view.findViewById(R.id.tv_safety_status);
         tvSafetyMessage = view.findViewById(R.id.tv_message);
         tvSafetyLevel = view.findViewById(R.id.tv_safety_number);
         ivHouseGif = view.findViewById(R.id.iv_house_gif);
+        tvIs = view.findViewById(R.id.tv_is);
+        tvSafetyNumber = view.findViewById(R.id.tv_safety_number);
         rootLayout = view.findViewById(R.id.root_layout);
 
         // Set up Firebase listener
@@ -120,20 +132,35 @@ public class HomeFragment extends Fragment {
 
         // Determine safety status and update UI based on ledStatus
         if ("green".equals(ledStatus)) {
+            tvIs.setText("is");
             tvSafetyStatus.setText("Safe");
             tvSafetyStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
-            ivHouseGif.setImageResource(R.drawable.error_icon); // Replace with your safe gif
+            Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.safe_house) // Replace with your actual GIF resource
+                    .into(ivHouseGif);
             tvSafetyMessage.setText("Everything is okay. No smoke detected.");
+            tvSafetyNumber.setTextColor(ContextCompat.getColor(requireContext(), R.color.green));
         } else if ("yellow".equals(ledStatus)) {
+            tvIs.setText("is in");
             tvSafetyStatus.setText("Warning");
             tvSafetyStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow));
-            ivHouseGif.setImageResource(R.drawable.error_icon); // Replace with your warning gif
+            Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.smoke_house) // Replace with your actual GIF resource
+                    .into(ivHouseGif); // Replace with your warning gif
             tvSafetyMessage.setText("Smoke detected! Stay alert.");
+            tvSafetyNumber.setTextColor(ContextCompat.getColor(requireContext(), R.color.yellow));
         } else if ("red".equals(ledStatus)) {
+            tvIs.setText("is in");
             tvSafetyStatus.setText("Danger");
             tvSafetyStatus.setTextColor(ContextCompat.getColor(requireContext(), R.color.red));
-            ivHouseGif.setImageResource(R.drawable.error_icon); // Replace with your danger gif
+            Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.fire_house) // Replace with your actual GIF resource
+                    .into(ivHouseGif); // Replace with your danger gif
             tvSafetyMessage.setText("Danger! Immediate action required!");
+            tvSafetyNumber.setTextColor(ContextCompat.getColor(requireContext(), R.color.red));
         }
 
         // Optionally log or display buzzer status

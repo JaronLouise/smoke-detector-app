@@ -6,6 +6,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="safety_label">Safety Levels</string>
 
+    <string name="sos_message_info">After enabling SOS Message, a message will be automatically sent to your added <font color="#5479F7">EMERGENCY CONTACT</font> that shows the house status and location.</string>
+
     <string name="safety_message_safe">Good job! Keep up the good work!</string>
     <string name="safety_message_warning">Smoke Detected, stay Vigilant.</string>
     <string name="safety_message_danger">Danger! Help is on the way.</string>
