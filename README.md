@@ -1,4 +1,4 @@
-<h1 align="center">S.M.A.R.T - Smoke Monitoring and Real-Time Tracking<br>
+<h1 align="center">S.M.A.R.T. - Smoke Monitoring and Real-Time Tracking<br>
 <br>
 <p align="center">
   <a href="https://git.io/typing-svg">
@@ -8,7 +8,7 @@
 </h1>
 
 ## :rocket: Project Title
-**S.M.A.R.T - Smoke Monitoring and Real-Time Tracking**
+**S.M.A.R.T. - Smoke Monitoring and Real-Time Tracking**
 
 ## :handshake: Team Name
 **SmokeSync**
