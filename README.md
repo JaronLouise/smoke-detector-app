@@ -48,7 +48,7 @@ This project aims to develop an IoT-enabled smoke detection system that integrat
 - **RGB LED Module:** Serves as an indicator regarding the current condition of the environment 
 
 ## :gear: Technologies Used
-- **Frontend:**: Android Studio (Java) – for designing and implementing the mobile app interface.
+- **Frontend:** Android Studio (Java) – for designing and implementing the mobile app interface.
 - **Backend:** Firebase Cloud Functions – for managing server-side logic and sending push notifications.
 - **Database:** Firebase Realtime Database – for storing and synchronizing real-time data.
 - **Notifications:** Firebase Cloud Messaging (FCM) – for delivering push notifications.
