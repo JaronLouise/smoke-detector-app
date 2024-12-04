@@ -41,6 +41,12 @@ This project aims to develop an IoT-enabled smoke detection system that integrat
 
 ---
 
+## :robot: Hardware
+- **ESP32 Microcontroller:** Integrated Wi-Fi and Bluetooth connectivity allows connection of the hardware and the mobile device. 
+- **MQ2 Gas Sensor:** Used for gas leak detection, can detect alcohol, carbon monoxide, liquefied petroleum gas(LPG), methane, propane, and smoke. 
+- **Active Buzzer:** Gives off a sound alarm when high concentration of gas or smoke is detected to notify nearby users.
+- **RGB LED Module:** Serves as an indicator regarding the current condition of the environment 
+
 ## :gear: Technologies Used
 
 - **Version Control**: Git and GitHub – for collaborative development and version management.
