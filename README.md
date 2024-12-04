@@ -32,7 +32,15 @@ This project aims to develop an IoT-enabled smoke detection system that integrat
   
 ---
 ## :old_key: Features
+- **Real-Time Smoke Detection:**: Provides detailed explanations of job sequencing algorithms and scheduling principles.
+- **Remote Monitoring:** Allows users remotely monitor smoke detection via the Android app for added safety.
+- **Fire Prevention Tips:** Offers educational content and preventive measures to minimize fire risks and enhance safety practices.
+- **SOS Messaging:** Allows users to enable an SOS mode to auto-send messages to emergency contacts during orange or red smoke levels.
+- **Emergency Contact Management:** Lets users add, edit, or delete emergency contacts for automated text notifications during critical events.
+- **Emergency Contact Alerts:** Sends critical messages to emergency contacts during orange or red smoke levels for timely help.
 
 ---
 
 ## :gear: Technologies Used
+
+- **Version Control**: Git and GitHub – for collaborative development and version management.
